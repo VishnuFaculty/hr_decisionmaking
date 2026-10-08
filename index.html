@@ -37,7 +37,7 @@ button:disabled{opacity:.5;cursor:not-allowed;background:var(--muted);color:whit
 .meta{color:var(--muted);font-size:14px; font-weight: 500;}
 .scenario{font-size:21px;font-weight:700;margin:16px 0 26px; color: #1a202c;}
 .options{display:grid;gap:14px}
-.option{background:white;border:2px solid var(--line);padding:20px;border-radius:14px;text-align:left;color:var(--ink);transition:all 0.15s; font-size: 16px; line-height: 1.5;}
+.option{background:white;border:2px solid var(--line);padding:20px;border-radius:14px;text-align:left;color:var(--ink);transition:all 0.15s; font-size: 16px; line-height: 1.5; cursor: pointer;}
 .option:hover{border-color:#90cdf4;background:#ebf8ff}
 .option.selected{border-color:var(--accent);background:#ebf8ff; box-shadow: 0 4px 12px rgba(66, 153, 225, 0.15);}
 .options.locked{pointer-events:none; opacity: 0.95;}
@@ -91,7 +91,7 @@ th {background: #f7fafc; font-weight: 700; color: #4a5568;}
     <div class="badge">Divergent Thinking & Cognitive Biases</div>
     <h1>The Cognitive Branch Head</h1>
     <p><strong>First-Time Leader's Simulator for Decision Making & Bias Mitigation</strong></p>
-    <p>As a new branch head, you must navigate high-pressure targets, staff dynamics, and complex customer demands. This simulator tests your ability to generate divergent solutions while overcoming dangerous cognitive biases (Halo, Horn, Anchoring, Hindsight, Expediency, and Conformity).</p>
+    <p>As a new branch head, you must navigate high-pressure targets, staff dynamics, and complex customer demands. This simulator tests your ability to generate divergent solutions while overcoming dangerous cognitive biases.</p>
   </section>
 
   <!-- Branch Setup Cartoon -->
@@ -147,8 +147,8 @@ th {background: #f7fafc; font-weight: 700; color: #4a5568;}
     <p>You face 25 realistic scenarios encompassing NPA management, credit appraisal, staff discipline, and customer service. Select the approach you would instinctively take. <strong>Once selected, your decision is locked.</strong></p>
     
     <div class="grid" style="margin-bottom: 20px;">
-      <div><label>Officer Name<input id="name" placeholder="Enter your name"></label></div>
-      <div><label>Branch Name<input id="branch" placeholder="e.g., Main Branch"></label></div>
+      <div><label>Officer Name<input id="officerName" placeholder="Enter your name"></label></div>
+      <div><label>Branch Name<input id="branchName" placeholder="e.g., Main Branch"></label></div>
     </div>
     
     <div class="card" style="margin-top:18px;background:#f8fafc; border-color: #e2e8f0;">
@@ -163,12 +163,12 @@ th {background: #f7fafc; font-weight: 700; color: #4a5568;}
         <div><strong>Bias Awareness</strong><br><span class="small">Actively recognizing and neutralizing Halo, Horn, Anchoring, Conformity, Expediency, and Hindsight biases.</span></div>
       </div>
     </div>
-    <button class="primary" style="margin-top:24px; font-size: 16px; width: 100%;" onclick="startGame()">Start 25-Decision Simulation</button>
+    <button class="primary" style="margin-top:24px; font-size: 16px; width: 100%;" onclick="startSimulator()">Start 25-Decision Simulation</button>
   </section>
 
   <section id="game" class="card hidden">
     <div class="topbar">
-      <div><strong id="qnum" style="font-size: 18px; color: var(--accent);">Decision 1 of 25</strong><span class="meta" id="dimensionHint" style="margin-left: 12px;"></span></div>
+      <div><strong id="qnum" style="font-size: 18px; color: var(--accent);">Decision 1 of 25</strong></div>
       <div class="meta" id="pct" style="font-weight: 700;">4%</div>
     </div>
     <div class="progress"><div id="progressFill"></div></div>
@@ -211,7 +211,7 @@ th {background: #f7fafc; font-weight: 700; color: #4a5568;}
     </div>
 
     <div class="card no-print" style="text-align: center;">
-      <button class="primary" onclick="restart()">Retake Simulation</button>
+      <button class="primary" onclick="restartSimulator()">Retake Simulation</button>
     </div>
   </section>
 </div>
@@ -237,6 +237,13 @@ th {background: #f7fafc; font-weight: 700; color: #4a5568;}
 </div>
 
 <script>
+// Expose all crucial functions to the global scope to guarantee they run when clicked
+window.startSimulator = startSimulator;
+window.selectAnswer = selectAnswer;
+window.closeModal = closeModal;
+window.nextQuestion = nextQuestion;
+window.restartSimulator = restartSimulator;
+
 // Dimensions: M, B, R, J, V, Bias
 const dimensions = ["Mind Mapping", "Brainstorming", "Role Playing", "Journaling", "Visualization", "Bias Awareness"];
 
@@ -646,29 +653,223 @@ const questions = [
 
 let current=0;
 let answers=new Array(questions.length).fill(null);
-let participant="", branchName="";
+let participant="", branchNameData="";
 
-function startGame(){
-  participant=document.getElementById("name").value.trim() || "Branch Head";
-  branchName=document.getElementById("branch").value.trim() || "PSB";
+function startSimulator(){
+  participant = document.getElementById("officerName").value.trim() || "Branch Head";
+  branchNameData = document.getElementById("branchName").value.trim() || "PSB";
   document.getElementById("intro").classList.add("hidden");
   document.getElementById("game").classList.remove("hidden");
   renderQuestion();
 }
 
 function renderQuestion(){
-  const q=questions[current];
+  const q = questions[current];
   const order = [0,1,2,3];
   
   // Predictable shuffle
   let seed = 4201 * (current + 1);
-  for(let i=order.length-1;i>0;i--){
+  for(let i=order.length-1; i>0; i--){
     seed = (seed * 9301 + 49297) % 233280;
     const j = Math.floor((seed / 233280) * (i + 1));
     [order[i], order[j]] = [order[j], order[i]];
   }
   q._displayOrder = order;
   
-  document.getElementById("qnum").textContent=`Decision ${current+1} of${questions.length}`;
+  document.getElementById("qnum").textContent=`Decision ${current+1} of ${questions.length}`;
   document.getElementById("pct").textContent=`${Math.round((current)/questions.length*100)}%`;
-  document.getElementById("progressFill").style.width=`${(current)/questions.length*100
+  document.getElementById("progressFill").style.width=`${(current)/questions.length*100}%`;
+  document.getElementById("scenario").textContent=q.scenario;
+  
+  const wrap = document.getElementById("options"); 
+  wrap.innerHTML = "";
+  wrap.classList.remove("locked");
+  
+  const nextBtn = document.getElementById("nextBtn");
+  nextBtn.disabled = true;
+  nextBtn.textContent = "Select an option to evaluate";
+  
+  q._displayOrder.forEach((actualIndex, displayIndex)=>{
+    const text = q.options[actualIndex];
+    const b = document.createElement("button");
+    b.className = "option";
+    b.innerHTML = `<strong style="color:var(--accent); font-size:18px; margin-right:8px;">${String.fromCharCode(65+displayIndex)}.</strong> ${text}`;
+    b.onclick = () => selectAnswer(actualIndex);
+    wrap.appendChild(b);
+  });
+}
+
+function selectAnswer(i){
+  if(answers[current] !== null) return; 
+  
+  answers[current]=i;
+  
+  const optionsWrap = document.getElementById("options");
+  optionsWrap.classList.add("locked");
+  
+  const q = questions[current];
+  const displayIndexOfSelected = q._displayOrder.indexOf(i);
+  optionsWrap.children[displayIndexOfSelected].classList.add("selected");
+  
+  document.getElementById("progressFill").style.width=`${(current+1)/questions.length*100}%`;
+  document.getElementById("pct").textContent=`${Math.round((current+1)/questions.length*100)}%`;
+
+  let bestIndex = 0;
+  let maxScore = -Infinity;
+  q.scores.forEach((scoreArr, idx) => {
+    let sum = scoreArr.reduce((a,b) => a+b, 0);
+    if(sum > maxScore) {
+      maxScore = sum;
+      bestIndex = idx;
+    }
+  });
+  
+  const displayIndexOfBest = q._displayOrder.indexOf(bestIndex);
+  
+  const selectedLetter = String.fromCharCode(65 + displayIndexOfSelected);
+  document.getElementById("modalSelectedOpt").innerHTML = `<strong style="color:var(--accent);">${selectedLetter}.</strong> ${q.options[i]}`;
+  document.getElementById("modalFeedback").textContent = q.feedback[i];
+  
+  const bestLetter = String.fromCharCode(65 + displayIndexOfBest);
+  document.getElementById("modalBestOpt").innerHTML = `<strong style="color:var(--accent);">${bestLetter}.</strong> ${q.options[bestIndex]}`;
+  document.getElementById("modalBestFeedback").textContent = q.feedback[bestIndex];
+  
+  document.getElementById("modalOverlay").classList.remove("hidden");
+}
+
+function closeModal() {
+  document.getElementById("modalOverlay").classList.add("hidden");
+  
+  const nextBtn = document.getElementById("nextBtn");
+  nextBtn.disabled = false;
+  if(current === questions.length - 1) {
+    nextBtn.textContent = "Generate Leadership Profile →";
+  } else {
+    nextBtn.textContent = "Next Decision →";
+  }
+}
+
+function nextQuestion() {
+  if(answers[current] === null) return;
+  
+  if(current < questions.length - 1) {
+    current++;
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function scoreAssessment(){
+  const totals = {}; 
+  const counts = {};
+  dimensions.forEach(d => { totals[d]=0; counts[d]=0; });
+  
+  let quality = 0;
+  answers.forEach((a,qi)=>{
+    const s = questions[qi].scores[a];
+    s.forEach((v,d)=>{
+      totals[dimensions[d]] += v; 
+      counts[dimensions[d]]++;
+    });
+    // Quality scoring out of 5 based on sum
+    quality += s.reduce((x,y)=>x+y,0)/5; 
+  });
+  const scores = {};
+  dimensions.forEach(d=>{
+    // Normalize to 0-100 scale based on weights
+    scores[d] = Math.round(((totals[d]/(counts[d]||1))+2)/4*100);
+    if(scores[d] > 100) scores[d] = 100;
+    if(scores[d] < 0) scores[d] = 0;
+  });
+  // Calculate quality out of 100
+  let normalizedQuality = Math.round(((quality/questions.length)+2)/4*100);
+  if(normalizedQuality > 100) normalizedQuality = 100;
+  return {scores, quality:normalizedQuality};
+}
+
+function levelFor(x){
+  if(x >= 80) return "Cognitive Master";
+  if(x >= 65) return "Adaptive Leader";
+  if(x >= 50) return "Convergent Thinker";
+  return "Rigid / Bias-Prone";
+}
+
+function interpretation(d,v){
+ const bands = v >= 75 ? "Highly active" : v >= 55 ? "Developing" : "Underutilized/Vulnerable";
+ const advice = {
+  "Mind Mapping":"You excel at finding hidden connections. Keep using associative thinking to break down complex banking structures.",
+  "Brainstorming":"You understand that quantity breeds quality. Continue crowdsourcing ideas without premature judgment.",
+  "Role Playing":"You have strong empathy. Stepping into the shoes of customers and staff helps you de-escalate conflicts.",
+  "Journaling":"You clarify thoughts well before acting. Free writing helps bypass emotional reactions in management.",
+  "Visualization":"You use visual aids to think outside the box. Flowcharts are your best problem-solving tools.",
+  "Bias Awareness":"You successfully recognize and neutralize psychological traps like Halo, Horn, Expediency, and Conformity biases."
+ };
+ return `<div class="interpret"><strong>${d}: ${v}/100 — ${bands}</strong><p style="margin-top:5px; font-size:14px;">${advice[d]}</p></div>`;
+}
+
+function showResults(){
+  const r = scoreAssessment();
+  const vals = Object.values(r.scores);
+  const overall = Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
+  
+  document.getElementById("game").classList.add("hidden");
+  document.getElementById("results").classList.remove("hidden");
+  
+  document.getElementById("resultTitle").textContent=`${participant}'s Leadership Profile`;
+  document.getElementById("resultSub").textContent=`${branchNameData} • ZLC Cognitive Leadership Simulation`;
+  document.getElementById("overall").textContent=overall;
+  document.getElementById("quality").textContent=r.quality;
+  document.getElementById("level").textContent=levelFor(overall);
+  
+  const bars = document.getElementById("bars"); 
+  bars.innerHTML = "";
+  dimensions.forEach(d=>{
+    const v = r.scores[d] || 0;
+    bars.innerHTML+=`<div class="barrow"><strong>${d}</strong><div class="bar"><div class="fill" style="width:0%" data-width="${v}%"></div></div><strong>${v}</strong></div>`;
+  });
+  
+  setTimeout(() => {
+    document.querySelectorAll('.fill').forEach(fill => {
+      fill.style.width = fill.getAttribute('data-width');
+    });
+  }, 100);
+
+  document.getElementById("interpretations").innerHTML = dimensions.map(d=>interpretation(d,r.scores[d])).join("");
+  
+  const tbody = document.getElementById("review"); 
+  tbody.innerHTML = "";
+  answers.forEach((a,i)=>{
+    const s = questions[i].scores[a];
+    const avg = s.reduce((x,y)=>x+y,0);
+    const signal = avg >= 2 ? "Highly Divergent" : avg > 0 ? "Constructive" : avg === 0 ? "Neutral/Standard" : "Bias Trap / Rigid";
+    
+    let bestIndex = 0, maxScore = -Infinity;
+    questions[i].scores.forEach((sArr, idx) => {
+      let sum = sArr.reduce((x,y)=>x+y,0);
+      if(sum > maxScore){ maxScore = sum; bestIndex = idx; }
+    });
+    const matchMark = (a === bestIndex) ? "⭐ " : "";
+    
+    tbody.innerHTML += `<tr><td>${i+1}</td><td style="font-size:13px;">${questions[i].scenario}</td><td style="font-size:14px;">${matchMark}${String.fromCharCode(65+questions[i]._displayOrder.indexOf(a))}. ${questions[i].options[a]}</td><td><span style="font-weight:600; font-size:13px; color:${avg>0?'var(--good)':avg<0?'var(--bad)':'var(--warn)'}">${signal}</span></td></tr>`;
+  });
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function restartSimulator(){
+  current = 0; 
+  answers = new Array(questions.length).fill(null);
+  document.getElementById("results").classList.add("hidden");
+  document.getElementById("intro").classList.remove("hidden");
+  
+  document.getElementById("progressFill").style.width = "0%";
+  document.getElementById("pct").textContent = "0%";
+  const nextBtn = document.getElementById("nextBtn");
+  nextBtn.disabled = true;
+  nextBtn.textContent = "Select an option to evaluate";
+  
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+</script>
+</body>
+</html>

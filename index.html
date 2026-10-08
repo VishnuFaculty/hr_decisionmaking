@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZLC Divergent Thinking Simulator — For First-Time Branch Heads</title>
+<title>ZLC Cognitive Leadership Simulator — For Branch Heads</title>
 <style>
 :root{
   --ink:#1a202c; --muted:#718096; --bg:#f7fafc; --card:#ffffff;
@@ -13,10 +13,10 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
 .container{max-width:1100px;margin:auto;padding:24px}
-.hero{background:linear-gradient(135deg,#2b6cb0,#4299e1);color:white;border-radius:22px;padding:36px;box-shadow:0 10px 30px rgba(43, 108, 176, 0.2)}
-.hero h1{margin:0 0 10px;font-size:clamp(26px,5vw,42px)}
-.hero p{margin:6px 0;opacity:.95; font-size: 17px;}
-.badge{display:inline-block;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);border-radius:999px;padding:6px 14px;margin:4px 6px 10px 0;font-size:13px; font-weight: 600; letter-spacing: 0.5px;}
+.hero{background:linear-gradient(135deg,#2b6cb0,#4299e1);color:white;border-radius:22px;padding:36px;box-shadow:0 10px 30px rgba(43, 108, 176, 0.2); position: relative; overflow: hidden;}
+.hero h1{margin:0 0 10px;font-size:clamp(26px,5vw,42px); position: relative; z-index: 2;}
+.hero p{margin:6px 0;opacity:.95; font-size: 17px; position: relative; z-index: 2;}
+.badge{display:inline-block;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);border-radius:999px;padding:6px 14px;margin:4px 6px 10px 0;font-size:13px; font-weight: 600; letter-spacing: 0.5px; position: relative; z-index: 2;}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px;margin-top:24px;box-shadow:0 4px 16px rgba(0,0,0,0.04)}
 .hidden{display:none!important}
 h2,h3,h4{margin-top:0; color: #2d3748;}
@@ -42,7 +42,7 @@ button:disabled{opacity:.5;cursor:not-allowed;background:var(--muted);color:whit
 .option.selected{border-color:var(--accent);background:#ebf8ff; box-shadow: 0 4px 12px rgba(66, 153, 225, 0.15);}
 .options.locked{pointer-events:none; opacity: 0.95;}
 .feedback{padding:16px;border-radius:12px;background:#f0fff4;border-left:5px solid var(--good);margin-top:10px; font-size: 15px;}
-
+.svg-container {background: #ffffff; border-radius: 16px; padding: 20px; margin-top: 24px; border: 1px solid var(--line); text-align: center;}
 .actions{display:flex;justify-content:flex-end;gap:12px;margin-top:26px}
 
 /* Modal Styles */
@@ -66,10 +66,10 @@ button:disabled{opacity:.5;cursor:not-allowed;background:var(--muted);color:whit
 @media(max-width:700px){.kpis{grid-template-columns:1fr}}
 .kpi{border:1px solid var(--line);border-radius:16px;padding:20px;background:#f7fafc; text-align: center;}
 .kpi .num{font-size:34px;font-weight:800; color: var(--accent); margin-top: 5px;}
-.bars{display:grid;gap:18px}
-.barrow{display:grid;grid-template-columns:160px 1fr 55px;gap:12px;align-items:center; font-weight: 600;}
-@media(max-width:600px){.barrow{grid-template-columns:110px 1fr 45px}}
-.bar{height:20px;background:#edf2f7;border-radius:99px;overflow:hidden}
+.bars{display:grid;gap:16px; grid-template-columns: repeat(2, 1fr);}
+@media(max-width:768px){.bars{grid-template-columns: 1fr;}}
+.barrow{display:grid;grid-template-columns:140px 1fr 45px;gap:12px;align-items:center; font-weight: 600; font-size: 14px;}
+.bar{height:16px;background:#edf2f7;border-radius:99px;overflow:hidden}
 .fill{height:100%;background:linear-gradient(90deg, var(--accent), var(--accent2));border-radius:99px; transition: width 1s ease-out;}
 .interpret{padding:20px;border-radius:14px;background:#ebf8ff;margin-top:18px; border: 1px solid #bee3f8;}
 table{width:100%;border-collapse:collapse; margin-top: 15px;}
@@ -87,39 +87,89 @@ th {background: #f7fafc; font-weight: 700; color: #4a5568;}
 <div class="container">
   <section class="hero">
     <div class="badge">Zonal Learning Centre</div>
-    <div class="badge">10 Branch Management Decisions</div>
-    <div class="badge">Divergent Thinking Matrix</div>
-    <h1>The Divergent Branch Head</h1>
-    <p><strong>First-Time Leader's Decision & Creativity Simulator</strong></p>
-    <p>As a new branch head, traditional convergent thinking (finding one "right" answer) isn't enough. This simulator tests your ability to generate multiple solutions, empathize with stakeholders, and visualize complex banking challenges before making a decision.</p>
+    <div class="badge">25 Branch Management Decisions</div>
+    <div class="badge">Divergent Thinking & Cognitive Biases</div>
+    <h1>The Cognitive Branch Head</h1>
+    <p><strong>First-Time Leader's Simulator for Decision Making & Bias Mitigation</strong></p>
+    <p>As a new branch head, you must navigate high-pressure targets, staff dynamics, and complex customer demands. This simulator tests your ability to generate divergent solutions while overcoming dangerous cognitive biases (Halo, Horn, Anchoring, Hindsight, Expediency, and Conformity).</p>
   </section>
+
+  <!-- Branch Setup Cartoon -->
+  <div class="svg-container no-print">
+    <svg width="100%" height="220" viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg">
+      <rect width="800" height="220" fill="#f8fafc" rx="12"/>
+      
+      <!-- Branch Manager Cabin -->
+      <rect x="40" y="30" width="240" height="170" fill="#ebf8ff" stroke="#bee3f8" stroke-width="4" rx="8"/>
+      <text x="160" y="60" font-family="sans-serif" font-size="16" font-weight="bold" fill="#2b6cb0" text-anchor="middle">Branch Head Cabin</text>
+      
+      <!-- Manager Desk & Chair -->
+      <rect x="80" y="120" width="120" height="15" fill="#4a5568" rx="2"/>
+      <rect x="90" y="135" width="100" height="65" fill="#718096"/>
+      
+      <!-- Branch Head (You) -->
+      <circle cx="140" cy="90" r="16" fill="#2b6cb0"/>
+      <path d="M115 130 Q140 105 165 130 L165 170 L115 170 Z" fill="#2b6cb0"/>
+      <rect x="125" y="108" width="24" height="15" fill="#ffffff" rx="2"/> <!-- Laptop -->
+      
+      <!-- Plant -->
+      <path d="M260 160 Q240 110 260 80 Q280 110 260 160" fill="#38a169"/>
+      <rect x="250" y="160" width="20" height="40" fill="#975a16" rx="2"/>
+      
+      <!-- Teller Counters -->
+      <rect x="340" y="100" width="420" height="100" fill="#edf2f7" stroke="#cbd5e0" stroke-width="3" rx="6"/>
+      <rect x="340" y="90" width="420" height="12" fill="#2b6cb0"/>
+      
+      <!-- Teller 1 -->
+      <rect x="370" y="40" width="120" height="50" fill="#e2e8f0" opacity="0.6"/>
+      <text x="430" y="30" font-family="sans-serif" font-size="13" font-weight="bold" fill="#4a5568" text-anchor="middle">Teller 1</text>
+      <circle cx="430" cy="65" r="13" fill="#4299e1"/>
+      
+      <!-- Teller 2 -->
+      <rect x="580" y="40" width="120" height="50" fill="#e2e8f0" opacity="0.6"/>
+      <text x="640" y="30" font-family="sans-serif" font-size="13" font-weight="bold" fill="#4a5568" text-anchor="middle">Teller 2</text>
+      <circle cx="640" cy="65" r="13" fill="#4299e1"/>
+      
+      <!-- Customer Line -->
+      <circle cx="430" cy="140" r="13" fill="#e53e3e"/>
+      <path d="M410 185 Q430 155 450 185 L450 210 L410 210 Z" fill="#e53e3e"/>
+      
+      <circle cx="430" cy="190" r="13" fill="#dd6b20"/>
+      
+      <!-- Bank Logo/Sign Placeholder -->
+      <circle cx="720" cy="50" r="20" fill="#2b6cb0"/>
+      <text x="720" y="55" font-family="sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">PSB</text>
+    </svg>
+  </div>
 
   <section id="intro" class="card">
     <h2>Welcome to the Simulator</h2>
-    <p><strong>You are the newly appointed head of a critical public sector bank branch.</strong></p>
-    <p>You will face 10 realistic management scenarios encompassing business growth, staff motivation, NPA management, and customer service. Select the approach you would instinctively take. <strong>Once selected, your decision is locked</strong>, and you will see how it aligns with proven divergent thinking methodologies.</p>
+    <p>You face 25 realistic scenarios encompassing NPA management, credit appraisal, staff discipline, and customer service. Select the approach you would instinctively take. <strong>Once selected, your decision is locked.</strong></p>
+    
     <div class="grid" style="margin-bottom: 20px;">
       <div><label>Officer Name<input id="name" placeholder="Enter your name"></label></div>
-      <div><label>Branch / Zone<input id="branch" placeholder="e.g., Mangaluru Main Branch"></label></div>
+      <div><label>Branch Name<input id="branch" placeholder="e.g., Main Branch"></label></div>
     </div>
+    
     <div class="card" style="margin-top:18px;background:#f8fafc; border-color: #e2e8f0;">
-      <h3>The 5 Pillars of Divergent Thinking</h3>
-      <p style="font-size: 14px; margin-bottom: 16px;">Based on cognitive science and effective management practices, these tools help break mental stalemates:</p>
+      <h3>The 6 Pillars of Cognitive Leadership</h3>
+      <p style="font-size: 14px; margin-bottom: 16px;">Break mental stalemates and mitigate cognitive biases using these tools:</p>
       <div class="grid">
-        <div><strong>Mind Mapping</strong><br><span class="small">Start in the centre and add nodes to connect branches/units together, helping your brain work by association[cite: 1].</span></div>
-        <div><strong>Brainstorming</strong><br><span class="small">Focus on quantity versus quality to generate as many ideas as possible[cite: 1].</span></div>
-        <div><strong>Role Playing</strong><br><span class="small">Put yourself in the shoes of a different character to see the branch from a new perspective[cite: 1].</span></div>
-        <div><strong>Journaling & Free Writing</strong><br><span class="small">Write non-stop in a stream-of-consciousness way to clarify thinking and generate ideas[cite: 1].</span></div>
-        <div><strong>Art & Visualization</strong><br><span class="small">Create graphs and illustrations to help you think outside the box and tap into creativity[cite: 1].</span></div>
+        <div><strong>Mind Mapping</strong><br><span class="small">Connecting isolated nodes (people, cash flows, processes) to see the bigger picture.</span></div>
+        <div><strong>Brainstorming</strong><br><span class="small">Generating massive quantities of ideas without premature judgment to find hidden solutions.</span></div>
+        <div><strong>Role Playing</strong><br><span class="small">Stepping into the shoes of customers, staff, or auditors to build empathy and de-escalate.</span></div>
+        <div><strong>Journaling / Drafting</strong><br><span class="small">Free-writing to clarify complex thoughts and bypass emotional triggers before acting.</span></div>
+        <div><strong>Visualization</strong><br><span class="small">Creating graphs, charts, and spatial maps to objectively analyze a situation.</span></div>
+        <div><strong>Bias Awareness</strong><br><span class="small">Actively recognizing and neutralizing Halo, Horn, Anchoring, Conformity, Expediency, and Hindsight biases.</span></div>
       </div>
     </div>
-    <button class="primary" style="margin-top:24px; font-size: 16px;" onclick="startGame()">Start 10-Decision Simulation</button>
+    <button class="primary" style="margin-top:24px; font-size: 16px; width: 100%;" onclick="startGame()">Start 25-Decision Simulation</button>
   </section>
 
   <section id="game" class="card hidden">
     <div class="topbar">
-      <div><strong id="qnum" style="font-size: 18px; color: var(--accent);">Decision 1 of 10</strong><span class="meta" id="dimensionHint" style="margin-left: 12px;"></span></div>
-      <div class="meta" id="pct" style="font-weight: 700;">10%</div>
+      <div><strong id="qnum" style="font-size: 18px; color: var(--accent);">Decision 1 of 25</strong><span class="meta" id="dimensionHint" style="margin-left: 12px;"></span></div>
+      <div class="meta" id="pct" style="font-weight: 700;">4%</div>
     </div>
     <div class="progress"><div id="progressFill"></div></div>
     <div class="scenario" id="scenario"></div>
@@ -133,17 +183,17 @@ th {background: #f7fafc; font-weight: 700; color: #4a5568;}
   <section id="results" class="hidden">
     <div class="card">
       <button class="secondary print no-print" onclick="window.print()">Print Report</button>
-      <h2 id="resultTitle">Your Divergent Leadership Profile</h2>
+      <h2 id="resultTitle">Your Cognitive Leadership Profile</h2>
       <p id="resultSub" style="color: var(--muted);"></p>
       <div class="kpis">
-        <div class="kpi"><div class="small">Divergence Index</div><div class="num" id="overall">—</div></div>
-        <div class="kpi"><div class="small">Decision Quality</div><div class="num" id="quality">—</div></div>
+        <div class="kpi"><div class="small">Cognitive Agility Index</div><div class="num" id="overall">—</div></div>
+        <div class="kpi"><div class="small">Bias Mitigation</div><div class="num" id="quality">—</div></div>
         <div class="kpi"><div class="small">Leadership Style</div><div class="num" id="level" style="font-size:22px">—</div></div>
       </div>
     </div>
 
     <div class="card">
-      <h3>Divergent Methodologies Utilized</h3>
+      <h3>Methodology Breakdown</h3>
       <div class="bars" id="bars"></div>
     </div>
 
@@ -166,11 +216,11 @@ th {background: #f7fafc; font-weight: 700; color: #4a5568;}
   </section>
 </div>
 
-<!-- Popup Modal overlay for displaying feedback -->
+<!-- Popup Modal -->
 <div id="modalOverlay" class="modal-overlay hidden">
   <div class="modal-content">
     <h3 style="color: var(--accent); margin-bottom: 5px;">Cognitive Analysis</h3>
-    <p style="margin-top:0; color: var(--muted); font-size: 14px;">How your chosen approach aligns with divergent thinking principles.</p>
+    <p style="margin-top:0; color: var(--muted); font-size: 14px;">How your choice aligns with divergent thinking & bias mitigation.</p>
     
     <p style="margin-top:20px; margin-bottom:8px; color:var(--muted); font-size:12px; text-transform:uppercase; font-weight:800; letter-spacing: 1px;">Your Strategic Choice</p>
     <div id="modalSelectedOpt" style="font-size:16px; margin-bottom:12px; font-weight: 500;"></div>
@@ -178,7 +228,7 @@ th {background: #f7fafc; font-weight: 700; color: #4a5568;}
     
     <hr style="border:none;border-top:1px solid var(--line);margin:24px 0;">
     
-    <p style="margin-top:15px; margin-bottom:8px; color:var(--accent); font-size:12px; text-transform:uppercase; font-weight:800; letter-spacing: 1px;">Highest Divergence Approach</p>
+    <p style="margin-top:15px; margin-bottom:8px; color:var(--accent); font-size:12px; text-transform:uppercase; font-weight:800; letter-spacing: 1px;">Highest Cognitive Approach</p>
     <div id="modalBestOpt" style="font-size:16px; margin-bottom:12px; font-weight: 500;"></div>
     <div id="modalBestFeedback" class="feedback" style="background: #ebf8ff; border-left-color: var(--accent2);"></div>
     
@@ -187,168 +237,409 @@ th {background: #f7fafc; font-weight: 700; color: #4a5568;}
 </div>
 
 <script>
-// Dimensions: Mind Mapping, Brainstorming, Role Playing, Journaling, Art
-const dimensions = ["Mind Mapping", "Brainstorming", "Role Playing", "Journaling", "Visualization"];
+// Dimensions: M, B, R, J, V, Bias
+const dimensions = ["Mind Mapping", "Brainstorming", "Role Playing", "Journaling", "Visualization", "Bias Awareness"];
 
+// 25 Questions mapping to 6 dimensions
 const questions = [
 {
- scenario:"Your branch is Rs. 15 Crore short of its Q2 deposit mobilization target. The regional office is demanding a turnaround plan by tomorrow morning. Your traditional local campaigns aren't working.",
+ scenario:"Your branch is Rs. 15 Crore short of its Q2 deposit target. The regional office demands a turnaround plan. Traditional campaigns aren't working.",
  options:[
-  "Call an immediate all-staff meeting and demand that everyone bring in at least 5 new accounts by week's end, applying strict pressure.",
-  "Set a 10-minute timer and write a rapid, stream-of-consciousness list of every possible local entity with cash flow, without stopping to judge if they will say yes.",
-  "Draw a central node representing the branch on a whiteboard, and branch out nodes to existing high-value customers, connecting them to their vendors, schools, and social clubs.",
-  "Draft a formal request to the Regional Manager asking for a reduction in the target due to poor local economic conditions."
+  "Call a meeting and demand staff bring in 5 new accounts each, applying strict pressure.",
+  "Set a timer and write a rapid stream-of-consciousness list of every local entity with cash flow, bypassing your internal judgment.",
+  "Draw a central node representing the branch, branching out to high-value customers, their vendors, and social clubs.",
+  "Ask the Regional Manager for a reduction in target due to local economic conditions."
  ],
- scores:[[-2,-2,-2,-2,-2], [1,2,0,2,0], [2,1,0,0,1], [-1,-1,-1,-1,-1]],
+ scores:[[-2,-2,-2,-2,-2, 0], [1,2,0,2,0, 1], [2,1,0,0,1, 1], [-1,-1,-1,-1,-1, 0]],
  feedback:[
-  "Applying pure pressure is convergent, reactive, and often demotivates staff without providing a strategic direction.",
-  "Excellent use of Free Writing and Brainstorming. Generating a massive, unfiltered quantity of ideas helps bypass the anxiety of the target.",
-  "Perfect Mind Mapping. You are utilizing associative thinking to uncover secondary deposit networks that your competitors are ignoring.",
-  "Giving up and seeking a target reduction shows zero divergent problem-solving or leadership accountability."
+  "Applying pure pressure is convergent, reactive, and demotivates staff.",
+  "Excellent Journaling/Brainstorming. Generating unfiltered ideas bypasses the anxiety of the target.",
+  "Perfect Mind Mapping. You uncover secondary deposit networks your competitors ignore.",
+  "Seeking a target reduction shows zero divergent problem-solving."
  ]
 },
 {
- scenario:"Customer wait times in the branch lobby average 45 minutes during peak hours. Customers are furious, and the front-line staff is highly stressed and defensive.",
+ scenario:"Customer wait times in the lobby average 45 minutes during peak hours. Customers are furious, and staff are defensive.",
  options:[
-  "Step into the lobby and silently role-play as a hurried customer. Walk through the entire physical journey from the token machine to the teller to feel where the friction points truly are.",
-  "Send a memo to the staff reminding them of the bank's standard turnaround time (TAT) guidelines and warn them of disciplinary action.",
-  "Sketch a rough floor plan of the branch on paper and draw colored lines tracking how people physically move, identifying spatial bottlenecks visually.",
-  "Brainstorm 20 completely absurd ideas with your team on how to entertain people in line (e.g., hiring a local musician), using humor to unlock realistic service innovations."
+  "Step into the lobby and silently role-play as a hurried customer from token machine to teller to feel the friction points.",
+  "Send a memo to staff reminding them of turnaround time guidelines with a warning.",
+  "Sketch a rough floor plan of the branch and draw colored lines tracking physical movement to spot bottlenecks visually.",
+  "Brainstorm 20 completely absurd ideas with your team on how to entertain people in line, using humor to unlock real innovations."
  ],
- scores:[[0,0,2,0,0], [-2,-2,-1,-1,-1], [1,0,0,0,2], [0,2,1,0,0]],
+ scores:[[0,0,2,0,0, 1], [-2,-2,-1,-1,-1, 0], [1,0,0,0,2, 1], [0,2,1,0,0, 1]],
  feedback:[
-  "Strong Role Playing. Stepping into the customer's shoes shatters internal branch biases and reveals actual pain points.",
-  "A bureaucratic, convergent response that adds stress without offering any operational solutions.",
-  "Excellent use of Art/Visualization. Visualizing the workflow outside the box often reveals physical bottlenecks that memos cannot fix.",
-  "Great Brainstorming. By focusing on quantity and absurdity, you lower the team's defensive barriers and spark genuine creative service solutions."
+  "Strong Role Playing. Shatters internal biases about 'lazy staff' and reveals actual pain points.",
+  "Bureaucratic, convergent response that adds stress without offering solutions.",
+  "Excellent Visualization. Visualizing workflow outside the box reveals physical bottlenecks memos cannot fix.",
+  "Great Brainstorming. Absurdity lowers defensive barriers and sparks creativity."
  ]
 },
 {
- scenario:"The local MSME union leader enters your cabin, shouting aggressively about the bank rejecting too many mudra loans for local artisans. They threaten a protest outside the branch.",
+ scenario:"A local union leader is shouting in your cabin about rejected Mudra loans, threatening a protest.",
  options:[
-  "Pull out the bank's credit policy manual and strictly quote the rejection criteria regarding CIBIL scores and collateral.",
-  "Take out a private notebook later and free-write all your personal frustrations and fears about the interaction to clarify your emotional state before responding officially.",
-  "Imagine you are the union leader facing intense pressure from struggling artisans. Speak to that specific fear rather than just defending the bank's credit policy.",
-  "Draw a map linking the rejected artisans to a local government training program or NGO that could help them build better credit profiles for future approval."
+  "Quote the bank's credit policy manual strictly regarding CIBIL scores.",
+  "Take out a private notebook later and free-write your personal frustrations to clarify your emotional state.",
+  "Imagine you are the union leader facing intense pressure from artisans. Speak to that specific fear rather than just defending the policy.",
+  "Draw a map linking the rejected artisans to local government training programs that could help them build credit profiles."
  ],
- scores:[[-1,-1,-1,-1,-1], [0,0,0,2,0], [0,0,2,0,0], [2,1,0,0,1]],
+ scores:[[-1,-1,-1,-1,-1, 0], [0,0,0,2,0, 1], [0,0,2,0,0, 1], [2,1,0,0,1, 1]],
  feedback:[
-  "Pure convergent defense. Quoting rules to an angry person usually escalates the conflict.",
-  "Good use of Journaling. Clarifying your own thinking and diffusing personal triggers allows for a more strategic response later.",
-  "Exceptional Role Playing. Empathy is a powerful negotiation tool. By addressing their underlying pressure, you de-escalate the threat.",
-  "Brilliant Mind Mapping and structural thinking. You connected an isolated problem (rejections) to a broader ecosystem solution."
+  "Pure convergent defense. Quoting rules to an angry person escalates conflict.",
+  "Good Journaling. Diffusing personal triggers allows for a strategic response later.",
+  "Exceptional Role Playing. By addressing their underlying pressure, you de-escalate the threat.",
+  "Brilliant Mind Mapping. Connecting an isolated problem to an ecosystem solution."
  ]
 },
 {
- scenario:"Your rural branch has terrible adoption rates for the new mobile banking app. The regional office is threatening to withhold your branch rating if numbers don't improve.",
+ scenario:"Your rural branch has terrible adoption rates for the new mobile banking app.",
  options:[
-  "Host an open forum with the village heads, aiming to generate 50 different reasons why people aren't using the app, prioritizing volume over quality of feedback.",
-  "Create a highly visual, comic-book style poster with minimal text showing a local farmer successfully using the app to check PM-Kisan subsidies.",
-  "Mandate that tellers force every customer to download the app before processing their cash deposits.",
-  "Role-play a transaction where you act as a customer who has never owned a smartphone, while your deputy tries to explain the app to you."
+  "Host a forum aiming to generate 50 different reasons people aren't using the app, prioritizing volume.",
+  "Create a visual, comic-book style poster showing a local farmer using the app to check subsidies.",
+  "Mandate that tellers force every customer to download the app before processing cash deposits.",
+  "Role-play a transaction where you act as a customer who has never owned a smartphone, while your deputy explains the app."
  ],
- scores:[[0,2,0,0,0], [0,1,0,0,2], [-2,-2,-2,-2,-2], [0,1,2,0,0]],
+ scores:[[0,2,0,0,0, 1], [0,1,0,0,2, 1], [-2,-2,-2,-2,-2, -2], [0,1,2,0,0, 1]],
  feedback:[
-  "Strong Brainstorming. Crowdsourcing a high quantity of objections gives you the raw data needed to build an adoption strategy.",
-  "Excellent Visualization. Using art and illustration bridges the literacy gap and taps into culturally relevant communication.",
-  "Coercion damages trust and violates customer service guidelines. It is the opposite of creative problem-solving.",
-  "High-impact Role Playing. This exercise will instantly reveal the flaws in your current sales pitch to rural customers."
+  "Strong Brainstorming. Crowdsourcing objections gives you raw data to build a strategy.",
+  "Excellent Visualization. Art bridges the literacy gap effectively.",
+  "Coercion damages trust and violates guidelines. Severe compliance risk.",
+  "High-impact Role Playing. Instantly reveals flaws in your current sales pitch."
  ]
 },
 {
- scenario:"You notice a sudden spike in Non-Performing Assets (NPAs) originating from retail personal loans sanctioned by your predecessor.",
+ scenario:"You notice a sudden spike in NPAs originating from personal loans sanctioned by your predecessor.",
  options:[
-  "Immediately issue standard legal recovery notices to all defaulters without exception.",
-  "Create a mind map placing the defaulters as nodes, looking for hidden associations like shared employers, common loan agents, or specific geographic clusters.",
-  "Spend 15 minutes free-writing a stream-of-consciousness analysis of the local economy to uncover non-obvious reasons why people might be defaulting this month.",
-  "Call the recovery agents and incentivize them to collect the funds using any means necessary before month-end."
+  "Issue standard legal recovery notices to all defaulters without exception.",
+  "Create a mind map placing defaulters as nodes, looking for hidden associations like shared employers or specific loan agents.",
+  "Spend 15 minutes free-writing an analysis of the local economy to uncover macroeconomic reasons.",
+  "Incentivize recovery agents to collect funds using any means necessary before month-end."
  ],
- scores:[[-1,-1,0,0,0], [2,1,0,0,1], [0,1,0,2,0], [-2,-2,-2,-2,-2]],
+ scores:[[-1,-1,0,0,0, 0], [2,1,0,0,1, 1], [0,1,0,2,0, 1], [-2,-2,-2,-2,-2, -2]],
  feedback:[
-  "A standard convergent procedure, but it misses the opportunity to identify systemic fraud or local economic trends.",
-  "Masterful Mind Mapping. Connecting the dots by association might uncover a single fraudulent agent or a closed local factory causing the defaults.",
-  "Effective use of Free Writing to bypass assumptions and clarify your thinking regarding macroeconomic factors.",
-  "Highly dangerous and non-compliant. Violating recovery guidelines exposes the bank to massive legal and reputational risk."
+  "Convergent procedure missing the opportunity to identify systemic fraud.",
+  "Masterful Mind Mapping. Connecting dots might uncover a single fraudulent agent.",
+  "Effective Journaling to bypass assumptions regarding economic factors.",
+  "Highly dangerous and non-compliant. Massive reputational risk."
  ]
 },
 {
- scenario:"A high-value corporate client wants to move their Rs. 10 Crore current account to a private bank because they feel your PSB's trade finance processing is too slow.",
+ scenario:"A corporate client wants to move their Rs. 10 Crore current account because trade finance processing is 'too slow'.",
  options:[
-  "Tell them PSB rules are rigid and they are free to leave if they don't value the safety of a government bank.",
-  "Brainstorm with your Forex officer to generate as many non-price value-adds as possible (e.g., dedicated RM, door-step document pickup) to offset the speed issue.",
-  "Put yourself in the CFO's shoes. Realize their main anxiety is supply-chain delays, and propose a customized SLA for their specific critical vendors.",
-  "Draw a visual flowchart of the bank's internal trade finance process alongside the client's supply chain to visually demonstrate where time can be saved collaboratively."
+  "Tell them PSB rules are rigid and they are free to leave.",
+  "Brainstorm with your Forex officer to generate as many non-price value-adds as possible to offset the speed issue.",
+  "Put yourself in the CFO's shoes. Realize their anxiety is supply-chain delays, and propose a customized SLA.",
+  "Draw a visual flowchart of the bank's internal process alongside their supply chain to demonstrate where time can be saved collaboratively."
  ],
- scores:[[-2,-2,-2,-2,-2], [0,2,0,0,0], [0,0,2,0,0], [1,0,0,0,2]],
+ scores:[[-2,-2,-2,-2,-2, 0], [0,2,0,0,0, 1], [0,0,2,0,0, 1], [1,0,0,0,2, 1]],
  feedback:[
-  "A rigid, arrogant approach that guarantees the loss of a major account and shows zero divergent thinking.",
-  "Great Brainstorming. Generating a large quantity of value-adds gives you negotiation currency without breaking bank policy.",
-  "Strong Role Playing. By adopting the CFO's perspective, you addressed the root anxiety rather than just the surface complaint.",
-  "Exceptional Visualization. Using graphs/illustrations taps into a shared, objective view of the problem, turning a conflict into a partnership."
+  "Rigid, arrogant approach that guarantees the loss of a major account.",
+  "Great Brainstorming. Generating value-adds gives negotiation currency.",
+  "Strong Role Playing. Addressing the root anxiety rather than the surface complaint.",
+  "Exceptional Visualization. Turns a conflict into a collaborative partnership."
  ]
 },
 {
- scenario:"Your branch team is demotivated due to a lack of promotions this year. Productivity is dropping, and absenteeism is high.",
+ scenario:"Your team is demotivated due to a lack of promotions. Productivity is dropping.",
  options:[
-  "Journal privately about your own feelings of burnout to ensure you don't project your own frustrations onto your team during your address to them.",
-  "Gather the staff and generate a massive list of ways to make the branch environment better that cost zero money, focusing purely on quantity of ideas.",
-  "Remind them that having a secure government job is a privilege and they should be grateful despite the lack of promotions.",
-  "Create a visual 'Branch Success Board' (Art) highlighting small daily wins, customer compliments, and peer-to-peer appreciation notes."
+  "Journal privately about your own feelings of burnout so you don't project frustrations onto your team.",
+  "Gather staff and generate a massive list of zero-cost ways to make the branch environment better.",
+  "Remind them that having a secure government job is a privilege.",
+  "Create a visual 'Branch Success Board' highlighting small daily wins and peer appreciation."
  ],
- scores:[[0,0,0,2,0], [0,2,0,0,0], [-2,-2,-2,-2,-2], [0,1,0,0,2]],
+ scores:[[0,0,0,2,0, 1], [0,2,0,0,0, 1], [-2,-2,-2,-2,-2, 0], [0,1,0,0,2, 1]],
  feedback:[
-  "High emotional intelligence via Journaling. Clarifying your own thoughts prevents toxic leadership projection.",
-  "Excellent Brainstorming. Empowering the team to generate numerous low-cost morale solutions builds immediate ownership and engagement.",
-  "Dismissive and convergent. Guilt-tripping staff never improves long-term productivity or morale.",
-  "Strong Visualization. Visualizing success taps into creativity and shifts the daily focus from what's missing to what's working."
+  "High EQ via Journaling. Prevents toxic leadership projection.",
+  "Excellent Brainstorming. Builds immediate ownership and engagement.",
+  "Dismissive and convergent. Guilt-tripping never improves morale.",
+  "Strong Visualization. Shifts daily focus from what's missing to what's working."
  ]
 },
 {
- scenario:"A local tech startup wants a credit facility but has no traditional collateral (like property) to offer, which standard bank policy usually requires.",
+ scenario:"A local tech startup wants a loan but has no traditional property collateral.",
  options:[
-  "Reject the proposal immediately as it doesn't fit the standard CBS (Core Banking System) checklist.",
-  "Role-play as a venture capitalist. How would they assess the risk and potential of this software company? Use that lens to structure a proposal to Head Office.",
-  "Map out the startup's intellectual property, recurring revenue streams, and prominent clients to see if a creative escrow or receivables-based collateral structure is possible.",
-  "Sit down and free-write a pitch to your Zonal Credit Head arguing why the bank needs to adapt its policies for the new digital economy."
+  "Reject the proposal immediately as it fails the standard collateral checklist.",
+  "Role-play as a venture capitalist. How would they assess the risk? Structure a proposal using that lens.",
+  "Map out the startup's intellectual property, recurring revenue, and clients to structure a receivables-based collateral.",
+  "Free-write a pitch to your Zonal Head arguing why policies must adapt for the digital economy."
  ],
- scores:[[-1,-1,-1,-1,-1], [0,1,2,0,0], [2,1,0,0,0], [0,1,0,2,0]],
+ scores:[[-1,-1,-1,-1,-1, 0], [0,1,2,0,0, 1], [2,1,0,0,0, 1], [0,1,0,2,0, 1]],
  feedback:[
-  "Standard convergent thinking. While safe, it ensures the bank will lose out on the entire new-economy sector.",
-  "Brilliant Role Playing. Stepping into a VC's shoes allows you to evaluate intangible assets and structure a compelling credit narrative.",
-  "Excellent Mind Mapping. By mapping out the business ecosystem, you discovered non-traditional cash flows that could secure the loan.",
-  "Good use of Free Writing to synthesize a persuasive, big-picture argument for policy adaptation."
+  "Standard convergent thinking. Ensures you lose out on the new-economy sector.",
+  "Brilliant Role Playing. Allows you to evaluate intangible assets.",
+  "Excellent Mind Mapping. Discovers non-traditional cash flows to secure the loan.",
+  "Good Journaling to synthesize a persuasive policy adaptation argument."
  ]
 },
 {
- scenario:"The branch premises are due for renewal, and the landlord is demanding an exorbitant 40% rent hike, refusing to negotiate.",
+ scenario:"The landlord is demanding an exorbitant 40% rent hike for branch premises renewal.",
  options:[
-  "Threaten to vacate the premises immediately, even though finding a new location and moving the strongroom would take a year.",
-  "Draw a comparative cost-benefit graph showing the landlord the mathematical reality of losing the bank (empty building, lost prestige) versus a moderate 10% hike.",
-  "Brainstorm 15 different ways to monetize the branch's unused physical space (e.g., ATM sub-leasing, digital branding) to offset the increased rent cost.",
-  "Role-play the landlord's situation. Are they facing pressure from a rival bank wanting the spot? Understand their leverage before countering."
+  "Threaten to vacate immediately, even though moving the strongroom takes a year.",
+  "Draw a comparative cost-benefit graph showing the landlord the mathematical reality of losing the bank versus a 10% hike.",
+  "Brainstorm 15 different ways to monetize the branch's unused physical space to offset the rent.",
+  "Role-play the landlord's situation. Are they facing pressure from a rival bank? Understand their leverage."
  ],
- scores:[[-2,-2,-1,-1,-1], [0,0,0,0,2], [0,2,0,0,0], [0,0,2,0,0]],
+ scores:[[-2,-2,-1,-1,-1, 0], [0,0,0,0,2, 1], [0,2,0,0,0, 1], [0,0,2,0,0, 1]],
  feedback:[
-  "An empty, convergent threat that you cannot execute. Poor negotiation.",
-  "Strong Visualization. Presenting the negotiation visually (Art) often breaks through stubbornness better than verbal arguments.",
-  "Creative Brainstorming. Generating multiple revenue-offset ideas is classic divergent problem-solving.",
-  "Essential Role Playing. Understanding the opponent's true constraints and alternatives is the foundation of negotiation."
+  "An empty, convergent threat that you cannot execute.",
+  "Strong Visualization. Visual math breaks through stubbornness better than arguments.",
+  "Creative Brainstorming. Generating revenue-offset ideas is classic problem-solving.",
+  "Essential Role Playing. Understanding the opponent's true constraints."
  ]
 },
 {
- scenario:"It is the last day of the financial year. Systems are incredibly slow, staff are exhausted, and a high-net-worth customer walks in demanding an immediate, complex DD issuance.",
+ scenario:"Last day of the financial year. Systems are slow, staff exhausted. A VIP walks in demanding a complex DD.",
  options:[
-  "Tell the customer to come back on April 2nd because year-end closing is the bank's priority today.",
-  "Mind map the exact minimum number of staff needed for the immediate year-end balancing, freeing up one specific officer to act as a dedicated VIP liaison for the day.",
-  "Free-write a quick, polite script for your front desk to use that acknowledges the delay but makes the customer feel valued and prioritized despite the chaos.",
-  "Interrupt the branch balancing and force your chief cashier to process the DD immediately to avoid a complaint."
+  "Tell the customer to come back tomorrow because year-end closing is the priority.",
+  "Mind map the exact minimum staff needed for balancing, freeing up one officer as a dedicated VIP liaison.",
+  "Free-write a quick, polite script for your front desk to acknowledge the delay while making the customer feel valued.",
+  "Interrupt the branch balancing and force the chief cashier to process the DD immediately."
  ],
- scores:[[-2,-1,-1,-1,-1], [2,0,0,0,0], [0,0,1,2,0], [-1,-1,-1,-1,-1]],
+ scores:[[-2,-1,-1,-1,-1, 0], [2,0,0,0,0, 1], [0,0,1,2,0, 1], [-1,-1,-1,-1,-1, -1]],
  feedback:[
-  "Poor service and convergent thinking. Turning away high-net-worth business damages the branch's long-term profitability.",
-  "Excellent Mind Mapping. Visually rearranging your human resources allows you to handle anomalies without breaking standard operations.",
-  "Great use of Journaling/Drafting. Preparing a thoughtful script clarifies communication and reduces friction during high-stress periods.",
-  "Reactive and disruptive. Breaking critical year-end protocols for one transaction causes systemic delays for everyone else."
+  "Poor service. Turning away HNI business damages long-term profitability.",
+  "Excellent Mind Mapping. Visually rearranging resources to handle anomalies.",
+  "Great Drafting. Preparing a thoughtful script reduces friction.",
+  "Reactive and disruptive. Breaking critical protocols causes systemic delays."
+ ]
+},
+{
+ scenario:"ANCHORING BIAS: A corporate client demands a 7% interest rate, anchoring heavily on a supposed private bank offer. Your limit is 8.5%.",
+ options:[
+  "Offer 7.5% immediately to stay close to their anchor number and secure the deal.",
+  "Role-play as their CFO. Realize they actually need higher working capital limits more urgently than lower rates.",
+  "Ignore their rate anchor. Draw a visual chart showing the 'total cost of borrowing' including hidden private bank fees.",
+  "Tell them your rate is 9% and non-negotiable."
+ ],
+ scores:[[0,0,0,0,0, -2], [0,0,2,0,0, 2], [0,0,0,0,2, 2], [-1,-1,-1,-1,-1, 0]],
+ feedback:[
+  "You fell for the Anchor Bias. Dropping rates instantly destroys bank margins unnecessarily.",
+  "Excellent Bias Mitigation via Role Playing. You shifted the negotiation from price to value structure.",
+  "Strong Visualization to break the anchor. You changed the metric they were focusing on.",
+  "Rigid and convergent. Fails to negotiate effectively."
+ ]
+},
+{
+ scenario:"HALO EFFECT: A famous, charismatic local industrialist known for philanthropy applies for an unsecured loan for a highly risky new venture. Your team loves him.",
+ options:[
+  "Approve it quickly. His impeccable personal reputation guarantees he won't default.",
+  "Brainstorm 10 specific ways this new venture could fail, strictly ignoring his past successes in other industries.",
+  "Write down a structured, objective risk analysis of the business model before meeting him again to bypass his charm.",
+  "Reject it outright because new ventures are against policy."
+ ],
+ scores:[[0,0,0,0,0, -2], [0,2,0,0,0, 2], [0,0,0,2,0, 2], [-1,-1,-1,-1,-1, 0]],
+ feedback:[
+  "Halo Effect trap! You confused personal charisma and past success with current project viability.",
+  "Excellent Brainstorming to break the Halo. Grounding the team in project reality protects the bank.",
+  "Strong Journaling. Clarifying objective facts neutralizes the emotional sway of a charismatic client.",
+  "Convergent rejection without analysis."
+ ]
+},
+{
+ scenario:"HORN EFFECT: An irritable, unpolished farmer with poor communication skills submits an agriculture proposal. Officers want to reject it because he 'seems uncooperative'.",
+ options:[
+  "Reject it. Good character and cooperative attitude are key to banking.",
+  "Map out his farm's supply chain, actual crop yields, and cash flows on a whiteboard, removing his personality from the equation.",
+  "Role-play the interview, acting as the stressed farmer to understand his anxiety regarding bank paperwork.",
+  "Tell him to improve his attitude before returning."
+ ],
+ scores:[[0,0,0,0,0, -2], [2,0,0,0,2, 2], [0,0,2,0,0, 2], [-1,-1,-1,-1,-1, 0]],
+ feedback:[
+  "Horn Effect trap. You allowed poor presentation to mask a potentially profitable, priority-sector asset.",
+  "Brilliant Mind Mapping/Visualization. You isolated the financial facts from the behavioral noise.",
+  "Great Role Playing to build empathy and overcome the initial negative bias.",
+  "Convergent and arrogant approach."
+ ]
+},
+{
+ scenario:"EXPEDIENCY BIAS: It is March 30th. Your Regional Head forwards a complex, borderline Rs. 5 Crore proposal and says 'Just sanction it today to hit our targets.'",
+ options:[
+  "Sanction it immediately. Hitting the year-end target is the priority today.",
+  "Write a rapid pros/cons list of the credit risks to consciously slow down your brain's rush to comply.",
+  "Draw the actual fund flow diagram to see if the money is structurally safe, despite the time pressure.",
+  "Refuse loudly and complain to the Zonal Office about the pressure."
+ ],
+ scores:[[0,0,0,0,0, -2], [0,0,0,2,0, 2], [0,0,0,0,2, 2], [-1,-1,-1,-1,-1, -1]],
+ feedback:[
+  "Expediency Bias trap. Rushing complex credit decisions for artificial deadlines causes severe NPA risks.",
+  "Excellent Journaling. Forcing yourself to write slows down reactive thinking and mitigates the rush.",
+  "Strong Visualization. Taking 10 minutes to draw the structure ensures you aren't blinding signing off on a bad risk.",
+  "Poor stakeholder management, even if the refusal is technically correct."
+ ]
+},
+{
+ scenario:"CONFORMITY BIAS: In a district credit meeting, all other bank managers agree to fund a struggling sugar mill due to political pressure. You know it's a toxic asset.",
+ options:[
+  "Agree to fund your share so your bank doesn't stand out or upset local authorities.",
+  "Mind-map the systemic, long-term NPA risks to your specific branch if you join this consortium.",
+  "Role-play as the lead dissenting voice in your head to construct a logical, data-backed refusal before speaking.",
+  "Walk out of the meeting silently."
+ ],
+ scores:[[0,0,0,0,0, -2], [2,0,0,0,0, 2], [0,0,2,0,0, 2], [-1,-1,-1,-1,-1, -1]],
+ feedback:[
+  "Conformity Bias trap. Following the herd into a bad loan makes you equally liable for the vigilance inquiry later.",
+  "Strong Mind Mapping. Visualizing the specific danger to your branch overrides the pressure to conform.",
+  "Excellent Role Playing. Preparing your dissent structurally allows you to resist groupthink professionally.",
+  "Passive-aggressive and unprofessional."
+ ]
+},
+{
+ scenario:"HINDSIGHT BIAS: A retail loan goes bad. Your credit officer says, 'I knew from day one they were going to default! We shouldn't have done it.'",
+ options:[
+  "Agree and reprimand the officer for not stopping the loan if they 'knew' it.",
+  "Ask the officer to pull their original appraisal note and review exactly what data was actually available back then.",
+  "Brainstorm what specific, new early warning signals can be added to the system now, rather than arguing about the past.",
+  "Fire the officer immediately."
+ ],
+ scores:[[0,0,0,0,0, -2], [0,0,0,2,0, 2], [0,2,0,0,0, 2], [-1,-1,-1,-1,-1, -2]],
+ feedback:[
+  "Hindsight Bias trap. You accepted the illusion that the unpredictable was predictable.",
+  "Great mitigation. Reviewing the documented Journaling/Notes grounds the team in the reality of the past.",
+  "Forward-looking Brainstorming. Shifts energy from useless hindsight blame into systemic improvement.",
+  "Extreme, unjustified reaction based on cognitive bias."
+ ]
+},
+{
+ scenario:"ANCHORING BIAS 2: Valuing a property for a mortgage. The borrower's agent casually mentions it is 'easily worth Rs. 2 Crores.'",
+ options:[
+  "Tell the valuer to ensure the report comes to at least 1.8 Cr to keep the client happy.",
+  "Completely ignore the number. Draw a map of recent actual sales in that exact neighborhood to establish an independent baseline.",
+  "Brainstorm 5 specific reasons why this particular property might actually be overvalued.",
+  "Accept the 2 Cr value without question."
+ ],
+ scores:[[0,0,0,0,0, -2], [0,0,0,0,2, 2], [0,2,0,0,0, 2], [-1,-1,-1,-1,-1, -2]],
+ feedback:[
+  "Anchoring trap. You let the borrower set the ceiling, artificially inflating the bank's risk exposure.",
+  "Excellent Visualization. Creating an independent data map shatters the psychological anchor.",
+  "Strong Brainstorming. Actively seeking contrary evidence mitigates the initial high anchor.",
+  "Total failure to conduct due diligence."
+ ]
+},
+{
+ scenario:"HALO EFFECT 2: Your top-performing deposit mobilization officer has started making glaring operational errors in KYC documentation.",
+ options:[
+  "Overlook the errors. They bring in too much money to upset them.",
+  "Map out the severe compliance and audit risks their errors are creating, separating their sales 'halo' from operations.",
+  "Role-play an upcoming RBI audit inspection with them so they vividly experience the impact of their errors.",
+  "Transfer them to another branch immediately."
+ ],
+ scores:[[0,0,0,0,0, -2], [2,0,0,0,0, 2], [0,0,2,0,0, 2], [-1,-1,-1,-1,-1, 0]],
+ feedback:[
+  "Halo trap. You are letting sales performance excuse dangerous operational risk.",
+  "Strong Mind Mapping. Visually isolating the risk breaks the protective 'halo' around the top performer.",
+  "High-impact Role Playing. Corrects the behavior without destroying the employee's motivation.",
+  "Reactive and loses the deposit business unnecessarily."
+ ]
+},
+{
+ scenario:"EXPEDIENCY BIAS 2: A VIP customer is screaming in the lobby over a Rs. 500 charge. You are busy with a critical HO report due in 10 minutes.",
+ options:[
+  "Reverse the charge instantly from your system just to make them go away quickly.",
+  "Take 2 minutes to pull their account history and free-write if the reversal is actually justified by their relationship value.",
+  "Send a junior clerk to deal with them blindly.",
+  "Let them shout and lock your cabin door to finish the report."
+ ],
+ scores:[[0,0,0,0,0, -2], [0,0,0,2,0, 2], [-1,-1,-1,-1,-1, -1], [-1,-1,-1,-1,-1, -1]],
+ feedback:[
+  "Expediency trap. Reversing charges blindly under pressure trains customers to abuse staff for free money.",
+  "Excellent Journaling/Data check. Pausing for just 2 minutes ensures a strategic, rather than panicked, decision.",
+  "Cowardly leadership. Exposes junior staff to abuse.",
+  "Terrible customer service and lobby management."
+ ]
+},
+{
+ scenario:"HORN EFFECT 2: An internal auditor who previously gave your branch a bad rating is arriving. You assume they are just out to get you.",
+ options:[
+  "Act highly defensive, restrict their access, and hide marginal files.",
+  "Role-play as the auditor. What are they mandated to find? How can you proactively present your improvements to them?",
+  "Brainstorm all the actual weaknesses in your branch so you are prepared, ignoring the auditor's personality.",
+  "Complain to the Zonal Inspectorate about the auditor's bias."
+ ],
+ scores:[[0,0,0,0,0, -2], [0,0,2,0,0, 2], [0,2,0,0,0, 2], [-1,-1,-1,-1,-1, -1]],
+ feedback:[
+  "Horn trap. Reacting defensively validates their negative view of your branch.",
+  "Brilliant Role Playing. Empathizing with their mandate turns an adversary into a collaborator.",
+  "Strong Brainstorming. Focusing on objective branch realities rather than personal animosity.",
+  "Escalation without cause makes you look unprofessional."
+ ]
+},
+{
+ scenario:"CONFORMITY BIAS 2: HO launches a mutual fund. Every other branch in your zone is forcing it on elderly pensioners to hit targets. Staff suggests you do the same.",
+ options:[
+  "Do it. You can't let the branch rank last in the zone.",
+  "Draw a visual risk-matrix showing the severe mismatch between the high-risk product and pensioner safety to explain your refusal to staff.",
+  "Mind-map alternative, compliant target segments for the mutual fund (e.g., young professionals, salaried accounts).",
+  "Ignore the target entirely and do zero sales."
+ ],
+ scores:[[0,0,0,0,0, -2], [0,0,0,0,2, 2], [2,0,0,0,0, 2], [-1,-1,-1,-1,-1, 0]],
+ feedback:[
+  "Conformity trap. Mis-selling to pensioners is a severe ethical and regulatory violation, despite peer pressure.",
+  "Excellent Visualization. Using data to visually explain ethical boundaries to your team.",
+  "Masterful Mind Mapping. You found a way to hit the target ethically without conforming to bad practices.",
+  "Passive resistance. Fails to drive legitimate business."
+ ]
+},
+{
+ scenario:"HINDSIGHT BIAS 2: The stock market drops. A wealth client yells, 'You should have known the market would crash and warned me to sell!'",
+ options:[
+  "Apologize profusely and say you made a mistake by not predicting it.",
+  "Gently guide them through historical visual charts to show that market timing is impossible, focusing on long-term recovery.",
+  "Role-play with your wealth manager on how to systematically handle these emotional 'hindsight' calls from clients.",
+  "Argue back that nobody can predict the future and hang up."
+ ],
+ scores:[[0,0,0,0,0, -2], [0,0,0,0,2, 2], [0,0,2,0,0, 2], [-1,-1,-1,-1,-1, -1]],
+ feedback:[
+  "Hindsight trap. Validating their irrational belief that the crash was predictable sets a dangerous precedent.",
+  "Strong Visualization. Visual data breaks through emotional hindsight bias effectively.",
+  "Great Role Playing. Preparing the team to handle predictable emotional biases systematically.",
+  "Aggressive and destroys the client relationship."
+ ]
+},
+{
+ scenario:"ANCHORING BIAS 3: Negotiating with a specialized concurrent auditor. They demand Rs. 50,000/month, anchoring high. Your budget is Rs. 30,000.",
+ options:[
+  "Counter at 45,000 immediately so you seem reasonable.",
+  "Brainstorm 10 non-monetary perks (flexible hours, references, free desk space) you can offer to bridge the value gap.",
+  "Map out the exact volume of work and calculate a per-file rate to create a completely new, objective anchor.",
+  "Refuse entirely and hire someone unqualified for 20,000."
+ ],
+ scores:[[0,0,0,0,0, -2], [0,2,0,0,0, 2], [2,0,0,0,0, 2], [-1,-1,-1,-1,-1, -1]],
+ feedback:[
+  "Anchoring trap. You immediately conceded 50% of your budget because they spoke first.",
+  "Great Brainstorming. Expanding the pie beyond just the monetary anchor.",
+  "Brilliant Mind Mapping. Resetting the negotiation with a logical, data-driven counter-anchor.",
+  "Compromising audit quality puts the whole branch at risk."
+ ]
+},
+{
+ scenario:"HALO EFFECT 3: A famous, top-tier IT vendor pitches a new queue management system. Their presentation is dazzling, but the tech seems overly complex.",
+ options:[
+  "Buy it immediately because they are a top-tier brand and the presentation looked great.",
+  "Free-write a 'pre-mortem' – imagining it's one year later and the system has failed, to uncover the hidden flaws behind the glossy pitch.",
+  "Ask the tellers (Role Play/Empathy) to test the interface to see if it's actually usable on the ground.",
+  "Stick to paper tokens forever. Tech is too risky."
+ ],
+ scores:[[0,0,0,0,0, -2], [0,0,0,2,0, 2], [0,0,2,0,0, 2], [-1,-1,-1,-1,-1, 0]],
+ feedback:[
+  "Halo trap. You bought the presentation, not the product.",
+  "Exceptional Journaling. The 'pre-mortem' technique specifically dismantles the Halo effect.",
+  "Strong Role Playing. Grounding the tech in actual user empathy destroys glossy illusions.",
+  "Rigid and anti-progress."
+ ]
+},
+{
+ scenario:"EXPEDIENCY BIAS 3: A cashier has a cash shortage of Rs. 2000. It's 7 PM. They offer to just pay it from their pocket instantly so everyone can go home.",
+ options:[
+  "Let them pay it. The branch balances, and everyone goes home quickly.",
+  "Visually map the entire day's high-value cash movements on a whiteboard to spot the systemic error, rather than taking the quick fix.",
+  "Brainstorm what specific transactions today could lead to exactly a Rs. 2000 error before allowing any personal payment.",
+  "Suspend the cashier immediately for negligence."
+ ],
+ scores:[[0,0,0,0,0, -2], [0,0,0,0,2, 2], [0,2,0,0,0, 2], [-1,-1,-1,-1,-1, -1]],
+ feedback:[
+  "Expediency trap. Taking the quick fix masks potentially massive underlying operational/fraud issues in the system.",
+  "Strong Visualization. Taking the time to map it out protects the integrity of the bank's accounting.",
+  "Excellent Brainstorming. A logical search for the error builds better cashier habits.",
+  "Extreme overreaction to a common operational hurdle."
  ]
 }
 ];
@@ -378,191 +669,6 @@ function renderQuestion(){
   }
   q._displayOrder = order;
   
-  document.getElementById("qnum").textContent=`Decision ${current+1} of ${questions.length}`;
-  document.getElementById("pct").textContent=`${Math.round((current+1)/questions.length*100)}%`;
-  document.getElementById("progressFill").style.width=`${(current)/questions.length*100}%`;
-  document.getElementById("scenario").textContent=q.scenario;
-  document.getElementById("dimensionHint").textContent="• Select your strategic approach";
-  
-  const wrap=document.getElementById("options"); 
-  wrap.innerHTML="";
-  wrap.classList.remove("locked");
-  
-  const nextBtn = document.getElementById("nextBtn");
-  nextBtn.disabled = true;
-  nextBtn.textContent = "Select an option to evaluate";
-  
-  q._displayOrder.forEach((actualIndex,displayIndex)=>{
-    const text=q.options[actualIndex];
-    const b=document.createElement("button");
-    b.className="option";
-    b.innerHTML=`<strong style="color:var(--accent); font-size:18px; margin-right:8px;">${String.fromCharCode(65+displayIndex)}.</strong> ${text}`;
-    b.onclick=()=>selectAnswer(actualIndex);
-    wrap.appendChild(b);
-  });
-}
-
-function selectAnswer(i){
-  if(answers[current] !== null) return; 
-  
-  answers[current]=i;
-  
-  const optionsWrap = document.getElementById("options");
-  optionsWrap.classList.add("locked");
-  
-  const q = questions[current];
-  const displayIndexOfSelected = q._displayOrder.indexOf(i);
-  optionsWrap.children[displayIndexOfSelected].classList.add("selected");
-  
-  document.getElementById("progressFill").style.width=`${(current+1)/questions.length*100}%`;
-
-  let bestIndex = 0;
-  let maxScore = -Infinity;
-  q.scores.forEach((scoreArr, idx) => {
-    let sum = scoreArr.reduce((a,b) => a+b, 0);
-    if(sum > maxScore) {
-      maxScore = sum;
-      bestIndex = idx;
-    }
-  });
-  
-  const displayIndexOfBest = q._displayOrder.indexOf(bestIndex);
-  
-  const selectedLetter = String.fromCharCode(65 + displayIndexOfSelected);
-  document.getElementById("modalSelectedOpt").innerHTML = `<strong style="color:var(--accent);">${selectedLetter}.</strong> ${q.options[i]}`;
-  document.getElementById("modalFeedback").textContent = q.feedback[i];
-  
-  const bestLetter = String.fromCharCode(65 + displayIndexOfBest);
-  document.getElementById("modalBestOpt").innerHTML = `<strong style="color:var(--accent);">${bestLetter}.</strong> ${q.options[bestIndex]}`;
-  document.getElementById("modalBestFeedback").textContent = q.feedback[bestIndex];
-  
-  document.getElementById("modalOverlay").classList.remove("hidden");
-}
-
-function closeModal() {
-  document.getElementById("modalOverlay").classList.add("hidden");
-  
-  const nextBtn = document.getElementById("nextBtn");
-  nextBtn.disabled = false;
-  if(current === questions.length - 1) {
-    nextBtn.textContent = "Generate Leadership Profile →";
-  } else {
-    nextBtn.textContent = "Next Decision →";
-  }
-}
-
-function nextQuestion() {
-  if(answers[current] === null) return;
-  
-  if(current < questions.length - 1) {
-    current++;
-    renderQuestion();
-  } else {
-    showResults();
-  }
-}
-
-function scoreAssessment(){
-  const totals={}; counts={};
-  dimensions.forEach(d => { totals[d]=0; counts[d]=0; });
-  
-  let quality=0;
-  answers.forEach((a,qi)=>{
-    const s=questions[qi].scores[a];
-    s.forEach((v,d)=>{
-      totals[dimensions[d]]+=v; counts[dimensions[d]]++;
-    });
-    quality += s.reduce((x,y)=>x+y,0)/5; // out of max possible per Q
-  });
-  const scores={};
-  dimensions.forEach(d=>{
-    // Normalize to 0-100 scale based on weights
-    scores[d]=Math.round(((totals[d]/(counts[d]||1))+2)/4*100);
-  });
-  // Calculate quality out of 100
-  let normalizedQuality = Math.round(((quality/questions.length)+2)/4*100);
-  return {scores,quality:normalizedQuality};
-}
-
-function levelFor(x){
-  if(x>=80)return "Visionary Leader";
-  if(x>=65)return "Adaptive Manager";
-  if(x>=50)return "Convergent Thinker";
-  return "Rigid Administrator";
-}
-
-function interpretation(d,v){
- const bands = v>=75 ? "Highly active" : v>=55 ? "Developing" : "Underutilized";
- const advice={
-  "Mind Mapping":"You excel at finding hidden connections. Keep using associative thinking to break down complex branch structures.",
-  "Brainstorming":"You understand that quantity breeds quality. Continue crowdsourcing ideas without premature judgment.",
-  "Role Playing":"You have strong empathy. Stepping into the shoes of customers and staff helps you de-escalate conflicts effectively.",
-  "Journaling":"You clarify your thoughts well before acting. Free writing helps you bypass emotional reactions in management.",
-  "Visualization":"You use visual aids to think outside the box. Whiteboards and flowcharts are your best problem-solving tools."
- };
- return `<div class="interpret"><strong>${d}: ${v}/100 — ${bands}</strong><p style="margin-top:5px;">${advice[d]}</p></div>`;
-}
-
-function showResults(){
-  const r=scoreAssessment();
-  const vals=Object.values(r.scores);
-  const overall=Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
-  
-  document.getElementById("game").classList.add("hidden");
-  document.getElementById("results").classList.remove("hidden");
-  
-  document.getElementById("resultTitle").textContent=`${participant}'s Leadership Profile`;
-  document.getElementById("resultSub").textContent=`${branchName} • ZLC Divergent Thinking Simulation`;
-  document.getElementById("overall").textContent=overall;
-  document.getElementById("quality").textContent=r.quality;
-  document.getElementById("level").textContent=levelFor(overall);
-  
-  const bars=document.getElementById("bars"); bars.innerHTML="";
-  dimensions.forEach(d=>{
-    const v=r.scores[d] || 0;
-    bars.innerHTML+=`<div class="barrow"><strong>${d}</strong><div class="bar"><div class="fill" style="width:0%" data-width="${v}%"></div></div><strong>${v}</strong></div>`;
-  });
-  
-  // Animate bars
-  setTimeout(() => {
-    document.querySelectorAll('.fill').forEach(fill => {
-      fill.style.width = fill.getAttribute('data-width');
-    });
-  }, 100);
-
-  document.getElementById("interpretations").innerHTML=dimensions.map(d=>interpretation(d,r.scores[d])).join("");
-  
-  const tbody=document.getElementById("review"); tbody.innerHTML="";
-  answers.forEach((a,i)=>{
-    const s=questions[i].scores[a];
-    const avg=s.reduce((x,y)=>x+y,0);
-    const signal=avg>=2?"Highly Divergent":avg>0?"Constructive":avg===0?"Neutral/Standard":"Convergent/Rigid";
-    
-    let bestIndex = 0, maxScore = -Infinity;
-    questions[i].scores.forEach((sArr, idx) => {
-      let sum = sArr.reduce((x,y)=>x+y,0);
-      if(sum > maxScore){ maxScore = sum; bestIndex = idx; }
-    });
-    const matchMark = (a === bestIndex) ? "⭐ " : "";
-    
-    tbody.innerHTML+=`<tr><td>${i+1}</td><td style="font-size:13px;">${questions[i].scenario}</td><td style="font-size:14px;">${matchMark}${String.fromCharCode(65+questions[i]._displayOrder.indexOf(a))}. ${questions[i].options[a]}</td><td><span style="font-weight:600; font-size:13px; color:${avg>0?'var(--good)':avg<0?'var(--bad)':'var(--warn)'}">${signal}</span></td></tr>`;
-  });
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function restart(){
-  current=0; answers=new Array(questions.length).fill(null);
-  document.getElementById("results").classList.add("hidden");
-  document.getElementById("intro").classList.remove("hidden");
-  
-  // Reset UI elements
-  document.getElementById("progressFill").style.width = "0%";
-  const nextBtn = document.getElementById("nextBtn");
-  nextBtn.disabled = true;
-  nextBtn.textContent = "Select an option to evaluate";
-  
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-</script>
-</body>
-</html>
+  document.getElementById("qnum").textContent=`Decision ${current+1} of${questions.length}`;
+  document.getElementById("pct").textContent=`${Math.round((current)/questions.length*100)}%`;
+  document.getElementById("progressFill").style.width=`${(current)/questions.length*100
